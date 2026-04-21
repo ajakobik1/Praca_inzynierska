@@ -37,6 +37,8 @@ void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRat
     // but be careful - it will be called on the audio thread, not the GUI thread.
 
     // For more details, see the help for AudioProcessor::prepareToPlay()
+	currentSampleRate = float(sampleRate);
+	updatePhaseDelta();
 }
 
 void MainComponent::getNextAudioBlock (const juce::AudioSourceChannelInfo& bufferToFill)
@@ -47,7 +49,22 @@ void MainComponent::getNextAudioBlock (const juce::AudioSourceChannelInfo& buffe
 
     // Right now we are not producing any data, in which case we need to clear the buffer
     // (to prevent the output of random noise)
-    bufferToFill.clearActiveBufferRegion();
+    //bufferToFill.clearActiveBufferRegion();
+
+	auto* leftBuffer = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
+	auto* rightBuffer = bufferToFill.buffer->getWritePointer(1, bufferToFill.startSample);
+
+    for (auto sample = 0; sample < bufferToFill.numSamples; ++sample)
+    {
+		float sampleValue = std::sin(currentPhase) * 0.1f; // Sine wave at 10% volume
+		leftBuffer[sample] = sampleValue;
+		rightBuffer[sample] = sampleValue;
+		currentPhase += phaseDelta;
+
+		// Wrap the phase to prevent it from getting too large
+        if (currentPhase >= 2.0f * juce::MathConstants<float>::pi)
+			currentPhase -= 2.0f * juce::MathConstants<float>::pi;
+    }
 }
 
 void MainComponent::releaseResources()

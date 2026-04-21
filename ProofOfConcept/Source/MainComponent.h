@@ -25,7 +25,17 @@ public:
 
 private:
     //==============================================================================
-    // Your private member variables go here...
+	float currentPhase = 0.0f; // Current point in the wave
+	float phaseDelta = 0.0f; // How much to advance the phase for each sample
+	float frequency = 440.0f; // Frequency of the sine wave
+	float currentSampleRate = 44100.0f; // Sample rate of the audio device
+
+    // How many cycles of the wave we go through per sample
+    void updatePhaseDelta()
+    {
+		auto cyclesPerSample = frequency / currentSampleRate;
+		phaseDelta = cyclesPerSample * 2.0f * juce::MathConstants<float>::pi;
+	}
 
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
