@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="qUdbjw" name="ProofOfConcept" projectType="guiapp" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
+  <MAINGROUP id="vIZRmY" name="ProofOfConcept">
+    <GROUP id="{83DFE88D-2152-E0F0-1A0B-E8ECB270A926}" name="Source">
+      <FILE id="YHmtjv" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="hK3DZi" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="I6XfW0" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES/>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="ProofOfConcept"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="ProofOfConcept"/>
+      </CONFIGURATIONS>
+    </VS2022>
+  </EXPORTFORMATS>
+</JUCERPROJECT>
